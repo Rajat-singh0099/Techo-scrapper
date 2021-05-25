@@ -8,7 +8,7 @@ import pytz
 from os import environ
 
 
-time_to_execute = ['02:35']
+time_to_execute = ['02:44']
 
 while True:
     print("retrieving news...")
@@ -51,6 +51,7 @@ while True:
         # print(articles)
         all_articles = []
         for article in articles:
+
             dict_article = {}
             headline = article.find('h2')   
             if headline:    
