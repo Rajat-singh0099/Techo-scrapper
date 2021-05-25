@@ -1,20 +1,20 @@
-import datetime as dt
+import datetime 
 import requests
 from bs4 import BeautifulSoup
 import time
 import tweepy
 import os
+import pytz
 from os import environ
 
 
-time_to_execute = ['01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-                   '07:00', '08:00', '09:00', '10:00', '11:00', '12:00',
-                   '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
-                   '19:00', '20:00', '21:00', '22:00', '23:00', '00:00']
+time_to_execute = ['10:00']
 
 while True:
     print("retrieving news...")
-    current_time = time.strftime("%H:%M")
+    IST = pytz.timezone('Asia/Kolkata')
+    datetime_ist = datetime.datetime.now(IST)
+    current_time = datetime_ist.strftime("%H:%M")
     print(current_time)
     if current_time in time_to_execute:
         print(f"\nAt {current_time}")
@@ -69,7 +69,7 @@ while True:
                 dict_article['image'] = image['src']
                 # print(image['src'])
 
-            dict_article['updated_time'] = dt.datetime.now().strftime('%Y-%m-%d %H:%m')
+            dict_article['updated_time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%m')
             # print(dict_article['updated_time'])
 
             all_articles.append(dict_article)
