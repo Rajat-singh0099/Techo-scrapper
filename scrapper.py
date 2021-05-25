@@ -8,7 +8,7 @@ import pytz
 from os import environ
 
 
-time_to_execute = ['02:58']
+time_to_execute = ['08:00', '20:00']
 
 while True:
     print("retrieving news...")
@@ -34,7 +34,7 @@ while True:
         results = BeautifulSoup(response.text, 'html.parser')
 
 
-        def tweet_image(url, message, link, summary, time, i):
+        def tweet_image(url, message, link, time, i):
             filename = 'temp.jpg'   
             request = requests.get(url, stream=True)
             if request.status_code == 200:
@@ -42,7 +42,7 @@ while True:
                     for chunk in request:
                         image.write(chunk)
 
-                api.update_with_media(filename, status= i + ". " + message + "-\n\t" + summary + ".\n"+ time + "\n-" + link)
+                api.update_with_media(filename, status = str(i) + "." + message + ".\n\n" + time + "\n\n--" + link)
                 os.remove(filename)
             else:
                 print("Unable to download image")
@@ -50,6 +50,7 @@ while True:
         articles = results.find_all('div', class_ = 'post-block post-block--image post-block--unread')
         # print(articles)
         all_articles = []
+
         for article in articles:
 
             dict_article = {}
@@ -64,6 +65,7 @@ while True:
             summary = article.find('div', class_ = 'post-block__content')
             if summary:
                 dict_article['summary'] = summary.text
+                # print(type(dict_article['summary']))
                 # print(summary.text)
             image = article.find('img')
             if image:
@@ -83,7 +85,7 @@ while True:
             content_summary = dict_article['summary']
             content_time = dict_article['updated_time']
             print("tweeting...")
-            tweet_image(content_image, content, content_url, summary,content_time, i)
+            tweet_image(content_image, content, content_url, content_time, i)
             time.sleep(15)
             i += 1
             if i == 7:
