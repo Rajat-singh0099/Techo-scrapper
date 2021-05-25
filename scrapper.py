@@ -74,13 +74,13 @@ while True:
 
             all_articles.append(dict_article)
 
-        i = 1
+        i = 0
         for article in all_articles:
             content = article['headline']
             content_image = article['image']
             print("tweeting...")
             tweet_image(content_image, content)
-            time.sleep(10)
+            time.sleep(15)
             i += 1
             if i == 6:
                 break
