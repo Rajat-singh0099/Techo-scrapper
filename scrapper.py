@@ -1,6 +1,4 @@
 import datetime as dt
-import nltk
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import time
