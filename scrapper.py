@@ -15,6 +15,7 @@ time_to_execute = ['01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
 while True:
     print("retrieving news...")
     current_time = time.strftime("%H:%M")
+    print(current_time)
     if current_time in time_to_execute:
         print(f"\nAt {current_time}")
 
