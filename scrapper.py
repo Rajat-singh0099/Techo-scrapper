@@ -8,7 +8,7 @@ import pytz
 from os import environ
 
 
-time_to_execute = ['02:26']
+time_to_execute = ['02:35']
 
 while True:
     print("retrieving news...")
@@ -58,7 +58,7 @@ while True:
                 # print(headline.text)
             link = article.find('h2').find('a')
             if link:
-                dict_article['link'] = 'https://techcrunch.com/' + link['href']
+                dict_article['link'] = link['href']
                 # print(link)
             summary = article.find('div', class_ = 'post-block__content')
             if summary:
