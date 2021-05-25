@@ -8,7 +8,7 @@ import pytz
 from os import environ
 
 
-time_to_execute = ['02:44']
+time_to_execute = ['02:58']
 
 while True:
     print("retrieving news...")
@@ -34,7 +34,7 @@ while True:
         results = BeautifulSoup(response.text, 'html.parser')
 
 
-        def tweet_image(url, message, link):
+        def tweet_image(url, message, link, summary, time, i):
             filename = 'temp.jpg'   
             request = requests.get(url, stream=True)
             if request.status_code == 200:
@@ -42,7 +42,7 @@ while True:
                     for chunk in request:
                         image.write(chunk)
 
-                api.update_with_media(filename, status= message + ".\n\n" + link)
+                api.update_with_media(filename, status= i + ". " + message + "-\n\t" + summary + ".\n"+ time + "\n-" + link)
                 os.remove(filename)
             else:
                 print("Unable to download image")
@@ -75,14 +75,16 @@ while True:
 
             all_articles.append(dict_article)
 
-        i = 0
+        i = 1
         for article in all_articles:
             content = article['headline']
             content_image = article['image']
             content_url = article['link']
+            content_summary = dict_article['summary']
+            content_time = dict_article['updated_time']
             print("tweeting...")
-            tweet_image(content_image, content, content_url)
+            tweet_image(content_image, content, content_url, summary,content_time, i)
             time.sleep(15)
             i += 1
-            if i == 6:
+            if i == 7:
                 break
