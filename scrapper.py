@@ -72,7 +72,9 @@ while True:
                 dict_article['image'] = image['src']
                 # print(image['src'])
 
-            dict_article['updated_time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%m')
+            
+
+            dict_article['updated_time'] = (datetime.datetime.now() + datetime.timedelta(hours=5, minutes=30)).strftime('%Y-%m-%d %H:%m')
             # print(dict_article['updated_time'])
 
             all_articles.append(dict_article)
