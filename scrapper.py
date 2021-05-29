@@ -42,7 +42,7 @@ while True:
                     for chunk in request:
                         image.write(chunk)
 
-                api.update_with_media(filename, status = str(i) + "." + message + ".\n\n" + time + "\n\n--" + link)
+                api.update_with_media(filename, status = str(i) + " - " + message + ".\n\n" + time + "\n\n--" + link)
                 os.remove(filename)
             else:
                 print("Unable to download image")
